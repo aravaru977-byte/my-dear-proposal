@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Dear 💗</title>
+<style>
+  *{box-sizing:border-box}
+  body{
+    margin:0; min-height:100vh; overflow:hidden;
+    font-family:Arial,sans-serif;
+    background:linear-gradient(135deg,#ffd1e8,#ff8fbd,#ffc7df);
+    display:flex; align-items:center; justify-content:center;
+    color:#7a1747;
+  }
+  .hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+  .heart{position:absolute;font-size:22px;animation:float 6s linear infinite;opacity:.8}
+  @keyframes float{0%{transform:translateY(110vh) rotate(0);opacity:0}15%{opacity:1}100%{transform:translateY(-15vh) rotate(360deg);opacity:0}}
+  .card{
+    width:min(92%,520px); padding:32px 24px; text-align:center;
+    background:rgba(255,255,255,.88); border-radius:30px;
+    box-shadow:0 20px 60px rgba(125,20,70,.25);
+    position:relative; z-index:2;
+  }
+  h1{font-size:42px;margin:5px 0 12px}
+  h2{font-size:25px;margin:8px 0 16px}
+  p{font-size:17px;line-height:1.6}
+  .bear{font-size:90px;animation:bounce 1.8s infinite}
+  @keyframes bounce{50%{transform:translateY(-10px)}}
+  .buttons{display:flex;gap:14px;justify-content:center;margin-top:24px;position:relative;min-height:55px}
+  #no{transition:left .25s ease,top .25s ease}
+  button{
+    border:0;border-radius:999px;padding:14px 28px;font-size:17px;
+    font-weight:bold;cursor:pointer;transition:.25s;
+  }
+  #yes{background:#ff3f88;color:white;box-shadow:0 8px 20px #ff3f8866}
+  #yes:hover{transform:scale(1.1)}
+  #no{background:#ffe3ef;color:#a22b61;position:relative}
+  .hidden{display:none}
+  .gift{font-size:85px;animation:pop .8s ease}
+  @keyframes pop{0%{transform:scale(0)}80%{transform:scale(1.15)}100%{transform:scale(1)}}
+  .sparkle{font-size:28px}
+</style>
+</head>
+<body>
+<div class="hearts" id="hearts"></div>
+
+<div class="card" id="mainCard">
+  <div class="bear">🧸</div>
+  <div class="sparkle">💗 ✨ 💗</div>
+  <h1>My Dear 💕</h1>
+  <h2>I have something to tell you...</h2>
+  <p>
+    You are someone who makes my days a little brighter and my heart a little happier.
+    I don't need a perfect reason to like you — I just know that I feel special whenever you're around. 💗
+  </p>
+  <p><b>So, my dear... will you be mine? 🥹❤️</b></p>
+
+  <div class="buttons">
+    <button id="yes">YES 💖</button>
+    <button id="no">NO 🙈</button>
+  </div>
+</div>
+
+<script>
+const hearts=document.getElementById("hearts");
+const symbols=["💗","💕","💖","💘","🌸","✨"];
+for(let i=0;i<24;i++){
+  const h=document.createElement("span");
+  h.className="heart";
+  h.textContent=symbols[Math.floor(Math.random()*symbols.length)];
+  h.style.left=Math.random()*100+"%";
+  h.style.animationDelay=(Math.random()*6)+"s";
+  h.style.animationDuration=(4+Math.random()*5)+"s";
+  hearts.appendChild(h);
+}
+
+const no=document.getElementById("no");
+no.addEventListener("mouseenter",moveNo);
+no.addEventListener("click",moveNo);
+function moveNo(){
+  no.style.position="fixed";
+  no.style.left=(8+Math.random()*78)+"%";
+  no.style.top=(12+Math.random()*76)+"%";
+}
+
+document.getElementById("yes").onclick=()=>{
+  document.getElementById("mainCard").innerHTML=`
+    <div class="gift">🧸💗</div>
+    <div class="sparkle">✨ 💕 ✨</div>
+    <h1>YAYYY! 🥹❤️</h1>
+    <h2>This is for you, my dear 💗</h2>
+    <p>
+      🧸 This little teddy is a gift for you.<br>
+      Keep it as a tiny reminder that someone out there
+      thinks you're really special. 💕
+    </p>
+    <p><b>You just made my heart the happiest! 💖</b></p>
+    <p>From this moment, let's make lots of beautiful memories together. 🌸✨</p>
+  `;
+  for(let i=0;i<35;i++){
+    setTimeout(()=>{
+      const h=document.createElement("span");
+      h.className="heart"; h.textContent=symbols[Math.floor(Math.random()*symbols.length)];
+      h.style.left=Math.random()*100+"%"; h.style.animationDuration="3s";
+      hearts.appendChild(h);
+      setTimeout(()=>h.remove(),3500);
+    },i*70);
+  }
+};
+</script>
+</body>
+</html>
